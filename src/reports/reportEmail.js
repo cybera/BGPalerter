@@ -119,6 +119,15 @@ export default class ReportEmail extends Report {
         return this.parseTemplate(this.templates[channel], context);
     };
 
+    getEmailSubject = (channel, content) => {
+        const context = this.getContext(channel, content);
+	if (context.prefix) {
+	    return ' for ' + context.prefix;
+	} else {
+	    return '';
+	}
+    };
+
     _sendEmail = (email) => {
         this.transporter
             .sendMail(email)
@@ -138,6 +147,7 @@ export default class ReportEmail extends Report {
             for (let emails of emailGroups) {
 
                 const text = this.getEmailText(channel, content);
+		const subject = this.getEmailSubject(channel, content);
 
                 if (text) {
                     const to = emails.join(', ');
@@ -149,7 +159,7 @@ export default class ReportEmail extends Report {
                     this.emailBacklog.push({
                         from: this.params.senderEmail,
                         to,
-                        subject: 'BGP alert: ' + channel,
+                        subject: 'BGP alert: ' + channel + subject,
                         text: text
                     });
                 }
