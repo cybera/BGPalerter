@@ -47,7 +47,7 @@
         "@babel/core": "^7.28.0",
         "@babel/node": "^7.28.0",
         "@babel/preset-env": "^7.28.0",
-        "@yao-pkg/pkg": "^6.5.1",
+        "@yao-pkg/pkg": "^6.24.0",
         "chai": "^4.3.10",
         "chai-subset": "^1.6.0",
         "mocha": "^10.7.3",
